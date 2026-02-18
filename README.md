@@ -1,83 +1,89 @@
-====================================================
-Guvi SDE Spring - Student Course Enrollment System
-====================================================
+# 🎓 Guvi SDE Spring - Student Course Enrollment System
 
-A Spring Boot + MongoDB backend application for managing:
+A Spring Boot + MongoDB backend application that manages:
 
-- Students
-- Courses
-- Enrollments
+- 👤 Students
+- 📘 Courses
+- 📝 Enrollments
 
-This project demonstrates clean layered architecture and backend best practices.
-Developed as part of an internship project under the Guvi SDE program.
+This project demonstrates clean layered architecture using:
 
-----------------------------------------------------
-KEY FEATURES
-----------------------------------------------------
+- Spring Boot
+- Spring Data MongoDB
+- REST APIs
+- Proper domain modeling
+- Repository pattern
 
-- RESTful API Design
-- Clean Layered Architecture
-- Domain Modeling
-- Repository Pattern
-- MongoDB Reference Relationships
+---
 
-----------------------------------------------------
-TECH STACK
-----------------------------------------------------
+## 🚀 Tech Stack
 
-Language    : Java 25 (LTS)
-Framework   : Spring Boot, Spring Framework
-Web         : Spring Web (REST APIs)
-Database    : MongoDB
-Data Access : Spring Data MongoDB
-Build Tool  : Maven
+- Java 25 (LTS)
+- Spring Boot
+- Spring Web
+- Spring Data MongoDB
+- MongoDB
+- Maven
 
-----------------------------------------------------
-PROJECT ARCHITECTURE
-----------------------------------------------------
+---
+
+## 🏗️ Project Architecture
+
+```
 
 Controller
-   |
+↓
 Service
-   |
+↓
 Repository
-   |
+↓
 MongoDB
 
-Each layer follows separation of concerns.
+````
 
-----------------------------------------------------
-MONGODB COLLECTIONS
-----------------------------------------------------
+Each domain follows clean separation of concerns.
 
-students     - Stores student details
-courses      - Stores course details
-enrollments  - Maps students to courses
+---
 
-----------------------------------------------------
-DATA MODELS
-----------------------------------------------------
+## 📂 Collections Used
 
-Student Model:
+| Collection   | Description |
+|-------------|-------------|
+| students    | Stores student details |
+| courses     | Stores course details |
+| enrollments | Connects students to courses |
 
+---
+
+## 👤 Student Model
+
+```json
 {
   "_id": "65b7f3b2a9c7e24e0f4e1a91",
   "name": "Soumyajit",
   "email": "soumyajit@example.com",
   "active": true
 }
+````
 
-Course Model:
+---
 
+## 📘 Course Model
+
+```json
 {
   "_id": "65b9a0c2a9c7e24e0f4e20a1",
   "title": "Spring Boot Foundations",
   "code": "SB101",
   "active": true
 }
+```
 
-Enrollment Model:
+---
 
+## 📝 Enrollment Model
+
+```json
 {
   "_id": "65b9a13aa9c7e24e0f4e20b2",
   "studentId": "65b7f3b2a9c7e24e0f4e1a91",
@@ -85,116 +91,121 @@ Enrollment Model:
   "enrolledAt": "2026-02-01T10:15:00Z",
   "status": "ACTIVE"
 }
+```
 
-----------------------------------------------------
-API INFORMATION
-----------------------------------------------------
+---
+
+# 🌐 API Endpoints
 
 Base URL:
+
+```
 http://localhost:9000
+```
 
-----------------
-Student APIs
-----------------
+---
 
-POST    /students          - Create student
-GET     /students          - List students
-GET     /students/{id}     - Get student by ID
-PUT     /students/{id}     - Update student
-DELETE  /students/{id}     - Delete student
+## 👤 Student APIs
 
-Supports search, pagination, and sorting:
+| Method | Endpoint       | Description       |
+| ------ | -------------- | ----------------- |
+| POST   | /students      | Create student    |
+| GET    | /students      | List students     |
+| GET    | /students/{id} | Get student by ID |
+| PUT    | /students/{id} | Update student    |
+| DELETE | /students/{id} | Delete student    |
 
+Supports search, pagination and sorting:
+
+```
 GET /students?q=example&sortBy=email&sortDir=desc&page=0&size=5
+```
 
-----------------
-Course APIs
-----------------
+---
 
-POST    /courses          - Create course
-GET     /courses          - List courses
-GET     /courses/{id}     - Get course by ID
-DELETE  /courses/{id}     - Delete course
+## 📘 Course APIs
 
-----------------
-Enrollment APIs
-----------------
+| Method | Endpoint      | Description      |
+| ------ | ------------- | ---------------- |
+| POST   | /courses      | Create course    |
+| GET    | /courses      | List courses     |
+| GET    | /courses/{id} | Get course by ID |
+| DELETE | /courses/{id} | Delete course    |
 
-POST  /enrollments?studentId={id}&courseId={id}
-      - Enroll student
+---
 
-GET   /enrollments/student/{studentId}
-      - Get enrollments by student
+## 📝 Enrollment APIs
 
-GET   /enrollments/course/{courseId}
-      - Get enrollments by course
+| Method | Endpoint                                  | Description                |
+| ------ | ----------------------------------------- | -------------------------- |
+| POST   | /enrollments?studentId={id}&courseId={id} | Enroll student             |
+| GET    | /enrollments/student/{studentId}          | Get enrollments by student |
+| GET    | /enrollments/course/{courseId}            | Get enrollments by course  |
 
-----------------------------------------------------
-HOW TO RUN THE PROJECT
-----------------------------------------------------
+---
 
-1. Clone Repository
+# 🧪 How to Run the Project
 
+### 1️⃣ Clone the Repository
+
+```bash
 git clone <your-repo-url>
-cd student-course-enrollment
+```
 
-2. Configure MongoDB
+### 2️⃣ Configure MongoDB
 
-Make sure MongoDB is running.
+Make sure MongoDB is running locally.
 
-Edit application.properties:
+Update `application.properties`:
 
+```
 spring.data.mongodb.uri=mongodb://localhost:27017/guvi_sde
 server.port=9000
+```
 
-3. Run Application
+### 3️⃣ Run the Application
 
+```bash
 mvn spring-boot:run
+```
 
-Server will start at:
+Server starts at:
+
+```
 http://localhost:9000
+```
 
-----------------------------------------------------
-DESIGN DECISIONS
-----------------------------------------------------
+---
 
-- Enrollment stores only studentId and courseId
-- Unique index on course code
-- Layered architecture
-- Uses Instant for timestamps
-- MongoDB _id mapped with @Id
+# 🧠 Design Decisions
 
-----------------------------------------------------
-FUTURE IMPROVEMENTS
-----------------------------------------------------
+* Enrollment stores only `studentId` and `courseId` to keep documents independent.
+* Unique index on course `code`.
+* Layered architecture (Controller → Service → Repository).
+* Uses `Instant` for enrollment timestamp.
+* MongoDB `_id` mapped using `@Id`.
 
-- Prevent duplicate enrollments
-- Use Enum for status
-- Add DTO layer
-- Add global exception handling
-- Add pagination
-- Add JWT authentication
-- Add Swagger documentation
+---
 
-----------------------------------------------------
-LEARNING OUTCOMES
-----------------------------------------------------
+# 📌 Future Improvements
 
-- NoSQL document modeling
-- Clean Spring Boot architecture
-- REST API design
-- Service validation
-- Backend best practices
+* Prevent duplicate enrollments (compound index)
+* Convert enrollment status to Enum
+* Add DTO layer
+* Add global exception handling
+* Add pagination for courses and enrollments
+* Add authentication (JWT)
 
-----------------------------------------------------
-AUTHOR
-----------------------------------------------------
+---
 
-Name   : Your Name
-Program: Guvi SDE Internship
-GitHub : Your GitHub Profile
-Email  : Your Email
+# 🎯 Learning Outcomes
 
-====================================================
-END OF FILE
-====================================================
+This project demonstrates:
+
+* Proper NoSQL document modeling
+* Reference-based relationships in MongoDB
+* Clean Spring Boot architecture
+* REST API design principles
+* Service-level validation
+
+---
